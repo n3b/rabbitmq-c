@@ -86,6 +86,11 @@ if (NOT BUILD_SHARED_LIBS)
 endif()
 
 add_library(rabbitmq ${RABBITMQ_SOURCES})
+set_target_properties(rabbitmq
+    PROPERTIES
+    SOVERSION ${VERSION}
+    VERSION ${VERSION}
+    )
 
 if(WIN32)
   target_link_libraries(rabbitmq ws2_32)
@@ -95,9 +100,11 @@ install(TARGETS rabbitmq
 	RUNTIME DESTINATION bin
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
-	PUBLIC_HEADER DESTINATION include)
+    COMPONENT runtime
+    )
 
 install(FILES amqp.h ${CMAKE_CURRENT_BINARY_DIR}/amqp_framing.h ${STDINT_H_INSTALL_FILE}
-	DESTINATION include)
+	DESTINATION include
+    COMPONENT devel)
 
 
