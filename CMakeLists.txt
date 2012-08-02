@@ -1,9 +1,16 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.6.2)
 project(rabbitmq-c "C")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-set(VERSION "0.2")
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 2)
+set(VERSION_BUILD 0)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_BUILD}")
+
+if (NOT DEFINED API_VERSION)
+    set(API_VERSION "${VERSION_MAJOR}.${VERSION_MINOR})
+endif()
 
 if (MSVC)
   set(CMAKE_C_FLAGS "/W4 /nologo ${CMAKE_C_FLAGS}")
@@ -101,3 +108,26 @@ install(FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
   COMPONENT devel
   )
+
+set(CPACK_PACKAGE_NAME "rabbitmq-c")
+set(CPACK_PACKAGE_VENDOR "")
+set(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "RabbitMQ C Client library")
+set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE-MIT)
+# Our README.md should be a good readme, and not install instructions
+#set(CPACK_RESOURCE_FILE_README "README.md")
+set(CPACK_STRIP_FILES ON)
+
+set(CPACK_GENERATOR RPM)
+
+
+set(CPACK_RPM_COMPONENT_INSTALL ON)
+include(CPackComponent)
+cpack_add_component(runtime)
+cpack_add_component(devel)
+cpack_add_component(tools)
+
+include(CPack)
+
