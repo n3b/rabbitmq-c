@@ -76,6 +76,7 @@ set(RABBITMQ_SOURCES
     amqp_api.c  amqp.h 
     amqp_connection.c  amqp_mem.c  amqp_private.h  amqp_socket.c  amqp_table.c
     amqp_url.c
+    amqp_hash.c amqp_hash.h
     ${SOCKET_IMPL}/socket.h ${SOCKET_IMPL}/socket.c
 )
 
