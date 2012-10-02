@@ -135,3 +135,15 @@ install(FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
   COMPONENT devel
   )
+
+set(CPACK_SOURCE_GENERATOR "TBZ2")
+set(CPACK_SOURCE_PACKAGE_FILE_NAME
+    ${CMAKE_PROJECT_NAME}-${RMQ_VERSION_MAJOR}.${RMQ_VERSION_MINOR}.${RMQ_VERSION_PATCH}-src)
+set(CPACK_SOURCE_IGNORE_FILES
+    \\\\.git
+    \\\\.gitignore$
+    \\\\.gitmodules$
+    \\\\.hgignore$
+    )
+
+include(CPack)
