@@ -94,6 +94,7 @@ if (BUILD_SHARED_LIBS)
     install(TARGETS rabbitmq
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
+        COMPONENT runtime
         )
     set(RMQ_LIBRARY_TARGET rabbitmq)
 endif (BUILD_SHARED_LIBS)
@@ -111,6 +112,7 @@ if (BUILD_STATIC_LIBS)
 
     install(TARGETS rabbitmq-static
         ARCHIVE DESTINATION lib
+        COMPONENT devel
         )
 
     if (NOT DEFINED RMQ_LIBRARY_TARGET)
@@ -120,6 +122,7 @@ endif (BUILD_STATIC_LIBS)
 
 install(FILES amqp.h ${CMAKE_CURRENT_BINARY_DIR}/amqp_framing.h ${STDINT_H_INSTALL_FILE}
 	DESTINATION include
+    COMPONENT devel
     )
 
 set(RMQ_LIBRARY_TARGET ${RMQ_LIBRARY_TARGET} PARENT_SCOPE)

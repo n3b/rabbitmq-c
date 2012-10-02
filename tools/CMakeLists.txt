@@ -63,6 +63,7 @@ if (BUILD_TOOLS_DOCS)
       install(
         FILES ${file}
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man${fileExt}
+        COMPONENT tools
         )
     endforeach()
 
@@ -73,6 +74,5 @@ endif()
 
 install(TARGETS amqp-publish amqp-get amqp-consume amqp-declare-queue amqp-delete-queue
 	RUNTIME DESTINATION bin
-	LIBRARY DESTINATION lib
-	ARCHIVE DESTINATION lib
-	PUBLIC_HEADER DESTINATION include)
+    COMPONENT tools
+    )

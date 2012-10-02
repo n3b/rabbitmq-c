@@ -129,4 +129,5 @@ configure_file(librabbitmq.pc.in ${CMAKE_CURRENT_BINARY_DIR}/librabbitmq.pc @ONL
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/librabbitmq.pc
   DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
+  COMPONENT devel
   )
